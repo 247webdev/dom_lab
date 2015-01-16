@@ -24,23 +24,19 @@ function addSelected() {
 
 // 5. clicking the reset button should remove the `selected` class from each `<li>` and change the image to `panic.jpeg`.
 function doFive(){
-	var resetButton = document.getElementById("reset");
-	resetButton.addEventListener("click", function(){
-		var selectedElems = document.getElementsByClassName("selected");
-		for(var i=0; i < selectedElems.length; i++){
-			selectedElems[i].classList.remove("selected");
-			var toFood = "./images/panic.jpeg";
-			imgElem[0].setAttribute("src", toFood);
-		}	
-	});	
+	document.querySelector("img").setAttribute("src", "./images/panic.jpeg"); 
+	var selectedElems = document.querySelectorAll("li");
+	for(var i=0; i < selectedElems.length; i++){
+		selectedElems[i].classList.remove("selected");
+	}	
 }
 
 var initialize = function () {
 	liElems = document.getElementsByTagName("li");
 	imgElem = document.getElementsByTagName("img");
+	document.getElementById("reset").addEventListener("click", doFive); 
 	doOne();
 	doTwo();
-	doFive();
 };
 
 var liElems,
