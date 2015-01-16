@@ -1,45 +1,21 @@
-// 1. change the greeting from "Hello, World!" to "Hello, Planet Earth!".
-function doOne(){
-	var greetingElem = document.getElementById("greeting");
-	greetingElem.innerHTML = "Hello, Planet Earth!";
-}
-
-// 2. set the `backgroundColor` of each `<li>` to `yellow`.
-function doTwo(){
-	for(var i=0; i < liElems.length; i++){
-	liElems[i].style.backgroundColor = "yellow";
-// used for task #3
-	liElems[i].addEventListener("click", addSelected);
-	}	
-}
-
-// 3. add the class of `selected` to an `<li>` when it is clicked.
 function addSelected() {
-	event.target.classList.add("selected");
-// 4. change the image to be the last clicked food item.
-	var whichFood = event.target.innerHTML;
-	var toFood = "./images/"+ whichFood +".jpeg";
-	imgElem[0].setAttribute("src", toFood);
+	event.target.classList.add("selected");  // 3. add class of `selected` to a clicked `<li>`
+	imgElem[0].setAttribute("src", "./images/"+ event.target.innerHTML +".jpeg" );  // 4. change the image to be the last clicked food item
 }
-
-// 5. clicking the reset button should remove the `selected` class from each `<li>` and change the image to `panic.jpeg`.
 function doFive(){
-	document.querySelector("img").setAttribute("src", "./images/panic.jpeg"); 
-	var selectedElems = document.querySelectorAll("li");
-	for(var i=0; i < selectedElems.length; i++){
-		selectedElems[i].classList.remove("selected");
+	document.querySelector("img").setAttribute("src", "./images/panic.jpeg"); // 5. when reset button is clicked: change the image to `panic.jpeg`
+	for(var i=0, selectedElems = document.querySelectorAll("li"); i < selectedElems.length; i++){  // 5. when reset button is clicked: remove class `selected` from each `<li>`
+		selectedElems[i].classList.remove("selected");  // 5.
 	}	
 }
-
 var initialize = function () {
-	liElems = document.getElementsByTagName("li");
 	imgElem = document.getElementsByTagName("img");
-	document.getElementById("reset").addEventListener("click", doFive); 
-	doOne();
-	doTwo();
+	document.getElementById("greeting").innerHTML = "Hello, Planet Earth!";  // 1. change the greeting to "Hello, Planet Earth!"
+	document.getElementById("reset").addEventListener("click", doFive);  // 3.
+	for(var i=0, liElems = document.getElementsByTagName("li"); i < liElems.length; i++){
+		liElems[i].style.backgroundColor = "yellow";  // 2. set each <li> to backgroundColor `yellow`
+		liElems[i].addEventListener("click", addSelected);  // 3.
+	}	
 };
-
-var liElems,
-	imgElem;
-
+var imgElem;  // set as global since it is used within two functions
 window.onload = initialize;
